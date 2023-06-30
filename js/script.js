@@ -1,32 +1,40 @@
-let formElement = document.querySelector(".js-form");
-let amountElement = document.querySelector(".js-amount");
-let currencyElement = document.querySelector(".js-currency");
-let resultElement = document.querySelector(".js-result");
+{
+    const init = () => {
+        const formElement = document.querySelector(".js-form");
+        const amountElement = document.querySelector(".js-amount");
+        const currencyElement = document.querySelector(".js-currency");
+        const resultElement = document.querySelector(".js-result");
 
-formElement.addEventListener("submit", (event) => {
-    event.preventDefault();
+        const getExchangeRate = (currency) => {
+            const rates = {
+                EUR: 4.56,
+                USD: 4.14,
+            };
 
-    let amount = +amountElement.value;
-    let currency = currencyElement.value;
-    let result;
+            return rates[currency] || 1;
+        };
 
-    let rateEUR = 4.56;
-    let rateUSD = 4.14;
+        const calculateResult = (amount, currency) => {
+            const exchangeRate = getExchangeRate(currency);
+            return amount / exchangeRate;
+        };
 
-    if (amount <= 0) {
-        resultElement.innerHTML = "Kwota musi być większa od zera!";
-        return;
-    }
+        formElement.addEventListener("submit", (event) => {
+            event.preventDefault();
 
-    switch (currency) {
-        case "EUR":
-            result = amount / rateEUR;
-            break;
+            const amount = +amountElement.value;
+            const currency = currencyElement.value;
 
-        case "USD":
-            result = amount / rateUSD;
-            break;
-    }
+            if (amount <= 0) {
+                resultElement.innerHTML = "Kwota musi być większa od zera!";
+                return;
+            }
 
-    resultElement.innerHTML = `Wynik: ${amount.toFixed(2)} zł = <strong>${result.toFixed(2)} ${currency}</strong>`;
-});
+            const result = calculateResult(amount, currency);
+
+            resultElement.innerHTML = `Wynik: ${amount.toFixed(2)} zł = <strong>${result.toFixed(2)} ${currency}</strong>`;
+        });
+    };
+
+    init();
+}
