@@ -10,14 +10,22 @@ html {
 
 .body {
     font-family: 'Lato', sans-serif;
-    margin: 10px auto;
-    padding: 5px;
-    max-width: 500px;
-    width: 100%;
+    background-image: url("../images/12.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .form {
-    margin: 0 auto;
+    width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .form__legend {
@@ -59,7 +67,7 @@ html {
 }
 
 .form__field:required {
-    border-color: rgb(236, 230, 238);
+    border-color: rgb(78, 74, 99);
 }
 
 .form__field:invalid {
